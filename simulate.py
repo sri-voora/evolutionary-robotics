@@ -19,26 +19,29 @@ pyrosim.Prepare_To_Simulate(robotId)
 backLegSensorValues=numpy.zeros(1000)
 frontLegSensorValues=numpy.zeros(1000)
 
-amplitude=numpy.pi/4
-frequency=1
-phaseOffSet=0
-targetAngles=[]
+backLegAmplitude=numpy.pi/4
+backLegFrequency=10
+backLegPhaseOffSet=-numpy.pi/4
+backLegTargetAngles=[]
+
+frontLegAmplitude=numpy.pi/4
+frontLegFrequency=10
+frontLegPhaseOffSet=0
+frontLegTargetAngles=[]
 
 for i in range(1000):
     p.stepSimulation()
     backLegSensorValues[i]=pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[i]=pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
-    targetAngles.append(numpy.sin((numpy.pi/-4)+(i*(numpy.pi/2000))))
-    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName=b'Torso_BackLeg', controlMode=p.POSITION_CONTROL, targetPosition=(targetAngles[i]), maxForce=30)
-    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName=b'Torso_FrontLeg', controlMode=p.POSITION_CONTROL, targetPosition=(targetAngles[i]), maxForce=30)
-    time.sleep(1/6000)
+    backLegTargetAngles.append(backLegAmplitude*numpy.sin(backLegFrequency*(i*numpy.pi/500)+backLegPhaseOffSet))
+    frontLegTargetAngles.append(frontLegAmplitude*numpy.sin(frontLegFrequency*(i*numpy.pi/500)+frontLegPhaseOffSet))
+    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName=b'Torso_BackLeg', controlMode=p.POSITION_CONTROL, targetPosition=(backLegTargetAngles[i]), maxForce=30)
+    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName=b'Torso_FrontLeg', controlMode=p.POSITION_CONTROL, targetPosition=(frontLegTargetAngles[i]), maxForce=30)
+    time.sleep(1/3000)
 
 numpy.save("data/backLegSensorValues.npy", backLegSensorValues)
 numpy.save("data/frontLegSensorValues.npy", frontLegSensorValues)
-numpy.save("data/sinFunction.npy", targetAngles)
-
-#for x in range(10):
-    #targetAngles=numpy.sin((1/6)*numpy.pi)
-#print(targetAngles)
+#numpy.save("data/backLegTargetAngles.npy", backLegTargetAngles)
+#numpy.save("data/frontLegTargetAngles.npy", frontLegTargetAngles)
 
 p.disconnect()

@@ -7,8 +7,11 @@ import numpy
 #frontLegSensorValues=numpy.load("data/frontLegSensorValues.npy")
 #matplotlib.pyplot.plot(frontLegSensorValues, label="Front Leg Sensor")
 
-targetAngles=numpy.load("data/sinFunction.npy")
-matplotlib.pyplot.plot(targetAngles, label="Front Leg Sensor")
+backLegTargetAngles=numpy.load("data/backLegTargetAngles.npy")
+matplotlib.pyplot.plot(backLegTargetAngles, label="Back Leg", linewidth=3)
 
-#matplotlib.pyplot.legend()
+frontLegTargetAngles=numpy.load("data/frontLegTargetAngles.npy")
+matplotlib.pyplot.plot(frontLegTargetAngles, label="Front Leg")
+
+matplotlib.pyplot.legend()
 matplotlib.pyplot.show()
