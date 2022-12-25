@@ -18,6 +18,7 @@ class MOTOR:
         
         if self.jointName==b'Torso_BackLeg':
             self.frequency=self.frequency/2
+            pass
 
         self.motorValues=self.amplitude*numpy.sin(self.frequency*(numpy.linspace(0,(2*numpy.pi),1000))+self.offSet)
 

@@ -5,13 +5,16 @@ import numpy
 import time
 from sensor import SENSOR
 from motor import MOTOR
+from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 class ROBOT:
     def __init__(self):
         self.sensors={}
         self.motors={}
+
         
         self.robotId = p.loadURDF("body.urdf")
+        self.nn=NEURAL_NETWORK("brain.nndf")
         
         pyrosim.Prepare_To_Simulate(self.robotId)
         
@@ -33,3 +36,7 @@ class ROBOT:
     def Act(self, t):
         for mot in self.motors:
             self.motors[mot].Set_Value(self.robotId, t)
+    
+    def Think(self):
+        self.nn.Update()
+        self.nn.Print()
