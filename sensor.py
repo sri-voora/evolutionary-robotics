@@ -7,8 +7,17 @@ import time
 class SENSOR:
     def __init__(self, linkName):
         self.linkName=linkName
-        self.values=numpy.zeros(1000)
-        #print(self.values)
+        
+        self.Prepare_To_Sense()
+    
+    def Prepare_To_Sense(self):
+        self.sensorValues=numpy.zeros(1000)
     
     def Get_Value(self, i):
-        self.values[i]=pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+        self.sensorValues[i]=pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+        #if i==999:
+            #print(self.sensorValues)
+            #pass
+    
+    def Save_Values(self):
+        numpy.save("data/sensorValues.npy", self.sensorValues)

@@ -10,4 +10,8 @@ frontLegAmplitude=np.pi/4
 frontLegFrequency=10
 frontLegPhaseOffSet=0
 
+amplitude=np.pi/4
+frequency=10
+phaseOffSet=-np.pi/4
+
 step=np.pi/500

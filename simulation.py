@@ -15,14 +15,11 @@ class SIMULATION:
     def Run(self):
         for i in range(1000):
             p.stepSimulation()
+
             self.robot.Sense(i)
-            #backLegTargetAngles.append(c.backLegAmplitude*numpy.sin(c.backLegFrequency*(i*c.step)+c.backLegPhaseOffSet))
-            #frontLegTargetAngles.append(c.frontLegAmplitude*numpy.sin(c.frontLegFrequency*(i*c.step)+c.frontLegPhaseOffSet))
-            #pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName=b'Torso_BackLeg', controlMode=p.POSITION_CONTROL, targetPosition=(backLegTargetAngles[i]), maxForce=30)
-            #pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName=b'Torso_FrontLeg', controlMode=p.POSITION_CONTROL, targetPosition=(frontLegTargetAngles[i]), maxForce=30)
-            time.sleep(1/60)
-            self.robot.Sense(i)
-            #print(i)
+            self.robot.Act(i)
+
+            time.sleep(1/3000)
 
     def __del__(self):
         p.disconnect()
