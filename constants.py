@@ -16,4 +16,4 @@ phaseOffSet=-np.pi/4
 
 step=np.pi/500
 
-numberOfGenerations=2
+numberOfGenerations=10
