@@ -6,9 +6,11 @@ import time
 import matplotlib.pylab as plt
 import random
 import constants as c
-
+import sys
 from simulation import SIMULATION
 
-simulation=SIMULATION()
+directOrGUI=sys.argv[1]
+simulation=SIMULATION(directOrGUI)
+#simulation=SIMULATION()
 simulation.Run()
 simulation.Get_Fitness()
