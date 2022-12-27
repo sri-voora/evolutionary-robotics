@@ -11,8 +11,8 @@ from solution import SOLUTION
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        #os.system("rm brain*.nndf")
-        #os.system("rm fitness*.txt")
+        os.system("rm brain*.nndf")
+        os.system("rm fitness*.txt")
 
         self.nextAvailableID=0
         self.parents={}
